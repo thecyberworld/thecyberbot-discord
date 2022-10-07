@@ -1,10 +1,6 @@
 import discord
 from discord.ext import commands
 from apikey import *
-from datetime import datetime
-
-import responses
-from colors import *
 
 
 def run_discord_bot():
@@ -12,7 +8,6 @@ def run_discord_bot():
     intents.members = True
     intents.message_content = True
     bot = discord.Client(intents=intents)
-
     bot = commands.Bot(command_prefix='!', intents=intents)
 
     self_roles_1_id = 1027668015791214673
@@ -29,7 +24,6 @@ def run_discord_bot():
         if our_message_id == payload.message_id:
             member = payload.member
             guild = member.guild
-
             emoji = payload.emoji.name
 
             if emoji == 'Student':
@@ -46,7 +40,6 @@ def run_discord_bot():
                 role = discord.utils.get(guild.roles, name='CTF Player')
             elif emoji == 'OpenSourceContributor':
                 role = discord.utils.get(guild.roles, name='Opensource Contributor')
-
             else:
                 role = discord.utils.get(guild.roles, name=payload.emoji.name)
             await member.add_roles(role)
@@ -72,13 +65,11 @@ def run_discord_bot():
                 role = discord.utils.get(guild.roles, name='CTF Player')
             elif emoji == 'OpenSourceContributor':
                 role = discord.utils.get(guild.roles, name='Opensource Contributor')
-
             member = await(guild.fetch_member(payload.user_id))
 
             if member is not None:
                 await member.remove_roles(role)
                 print(f"Remove: {role}.")
-
             else:
                 print("Member not found")
 
@@ -116,7 +107,7 @@ def run_discord_bot():
         await msg.add_reaction("<:CTFPlayer:1027660596453331094>")
         await msg.add_reaction("<:OpenSourceContributor:1027662647589601434>")
 
-        await ctx.message.add_reaction("<:BugHunter:1027642614775816242>")
+        await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
 
     @bot.event
     async def on_member_join(member):
