@@ -114,6 +114,7 @@ def run_discord_bot():
         channel_id = 920989002054656042
         channel = bot.get_channel(channel_id)
         await channel.send(f"Hello {member}.\nWelcome to the thecyberworld community")
+        member.send("Welcome to thecyberworld Comunity, please check out our website https://www.thecyberhub.org/")
 
     # Remember to run your bot with your personal TOKEN
     bot.run(TOKEN)
