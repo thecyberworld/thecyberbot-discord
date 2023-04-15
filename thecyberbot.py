@@ -3,7 +3,7 @@ from discord.ext import commands
 from apikey import *
 import asyncio
 import random
-import pafy
+# import pafy
 import youtube_dl
 
 colors = [
