@@ -3,8 +3,6 @@ from discord.ext import commands
 from apikey import *
 import asyncio
 import random
-# import pafy
-import youtube_dl
 
 colors = [
     0x1abc9c, 0x11806a, 0x2ecc71, 0x1f8b4c, 0x3498db, 0x206694,
@@ -13,14 +11,12 @@ colors = [
     0x979c9f, 0x546e7a, 0x7289da, 0x99aab5
 ]
 
-
 def run_discord_bot():
     intents = discord.Intents.default()
     intents.members = True
     intents.message_content = True
     bot = discord.Client(intents=intents)
     bot = commands.Bot(command_prefix='!', intents=intents)
-    discord_bot = discord.Client(intents=intents)
     self_roles_1_id = 1027668015791214673
     self_roles_cyber_team_id = 1031750672141537352
     self_roles_helper_id = 1031755073128247397
@@ -35,15 +31,7 @@ def run_discord_bot():
         print(f'{bot.user} is now running!')
         print('-' * dash_len)
 
-        # channel_lofi = bot.get_channel(1066752630333919373)
-        # vc = await channel_lofi.connect()
-        # video = pafy.new("https://www.youtube.com/watch?v=8nXqcugV2Y4")
-        # bestaudio = video.getbestaudio()
-        # playurl = bestaudio.url
         while True:
-            # vc.play(discord.FFmpegOpusAudio(playurl))
-            # await asyncio.sleep(1)
-
             channel = bot.get_channel(1065245064613343313)
             async for message in channel.history(limit=1):
                 latest_message = message
