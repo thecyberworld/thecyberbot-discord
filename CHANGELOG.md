@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/thecyberworld/thecyberbot-discord/compare/v0.2.0...v0.2.1) (2023-04-16)
+
+
+### Bug Fixes
+
+* code ([094c9e7](https://github.com/thecyberworld/thecyberbot-discord/commit/094c9e7652816f6d20a9aef8155b269ecae4a377))
+
+
+
 # [0.2.0](https://github.com/thecyberworld/thecyberbot-discord/compare/v0.1.0...v0.2.0) (2022-10-18)
 
 
