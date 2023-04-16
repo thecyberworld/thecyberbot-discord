@@ -12,7 +12,6 @@ colors = [
     0x979c9f, 0x546e7a, 0x7289da, 0x99aab5
 ]
 
-# Load environment variables from .env file
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
@@ -23,7 +22,6 @@ def run_discord_bot():
     intents.message_content = True
     bot = discord.Client(intents=intents)
     bot = commands.Bot(command_prefix='!', intents=intents)
-    discord_bot = discord.Client(intents=intents)
     self_roles_1_id = 1027668015791214673
     self_roles_cyber_team_id = 1031750672141537352
     self_roles_helper_id = 1031755073128247397
@@ -38,7 +36,6 @@ def run_discord_bot():
         print(f'{bot.user} is now running!')
         print('-' * dash_len)
         while True:
-
             channel = bot.get_channel(1065245064613343313)
             async for message in channel.history(limit=1):
                 latest_message = message
