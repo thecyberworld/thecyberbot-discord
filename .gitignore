@@ -3,3 +3,4 @@ venv
 __pycache__
 apikey.py
 thecyberbot_test.py
+.env
