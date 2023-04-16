@@ -1,3 +1,2 @@
 discord
-youtube_dl
-# pafy
+python-dotenv

@@ -1,10 +1,9 @@
 import discord
 from discord.ext import commands
-from apikey import *
 import asyncio
+import os
+from dotenv import load_dotenv
 import random
-# import pafy
-import youtube_dl
 
 colors = [
     0x1abc9c, 0x11806a, 0x2ecc71, 0x1f8b4c, 0x3498db, 0x206694,
@@ -13,6 +12,10 @@ colors = [
     0x979c9f, 0x546e7a, 0x7289da, 0x99aab5
 ]
 
+# Load environment variables from .env file
+load_dotenv()
+
+TOKEN = os.getenv('TOKEN')
 
 def run_discord_bot():
     intents = discord.Intents.default()
@@ -34,15 +37,7 @@ def run_discord_bot():
         print('-' * dash_len)
         print(f'{bot.user} is now running!')
         print('-' * dash_len)
-
-        # channel_lofi = bot.get_channel(1066752630333919373)
-        # vc = await channel_lofi.connect()
-        # video = pafy.new("https://www.youtube.com/watch?v=8nXqcugV2Y4")
-        # bestaudio = video.getbestaudio()
-        # playurl = bestaudio.url
         while True:
-            # vc.play(discord.FFmpegOpusAudio(playurl))
-            # await asyncio.sleep(1)
 
             channel = bot.get_channel(1065245064613343313)
             async for message in channel.history(limit=1):
@@ -232,94 +227,94 @@ def run_discord_bot():
     #
     #     await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
 
-    # @bot.command(pass_context=True)
-    # async def self_roles_cyber_teams(ctx):
-    #     embed = discord.Embed(
-    #         title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
-    #         description="\n\n"
-    #                     "**Are you Blue Team,Red Team, or a little Both?** \n"
-    #                     "**Let us know what Team you Represent by reacting down below!!!** \n"
-    #                     "------------------------------------- \n\n"
-    #                     "<:BlueTeam:1026898873471471697> - **<@&1028925586292351036>** Defense\n\n"
-    #                     "<:RedTeam:1027642650653896724> - **<@&1028925597931540490>** Offense\n\n"
-    #                     "<:PurpleTeam:1027642647076151326> - **<@&1028925767742136412>** Both\n\n"
-    #                     "------------------------------------- \n"
-    #                     "**The best Defense is a good Offense!**"
-    #                     "",
-    #         url="https://www.thecyberhub.org/",
-    #         # timestamp=datetime.now(tz=None),
-    #         color=0x7289da
-    #     )
-    #
-    #     msg = await ctx.send(embed=embed)
-    #     await msg.add_reaction("<:BlueTeam:1026898873471471697>")
-    #     await msg.add_reaction("<:RedTeam:1027642650653896724>")
-    #     await msg.add_reaction("<:PurpleTeam:1027642647076151326>")
-    #
-    #     await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
-    #
-    # @bot.command(pass_context=True)
-    # async def self_roles_cyber_pro(ctx):
-    #     embed = discord.Embed(
-    #         title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
-    #         description="\n\n"
-    #                     "**How to earn Special Roles?** \n"
-    #                     "------------------------------------- \n\n"
-    #                     "<:Volunteer:1031742474269499393> - **<@&1028936957260201994>** will be selected manually based on their contribution and engagement on the server. \n\n"
-    #                     "<:Moderator:1027660630620131378> - **<@&843201976418566145>** will be chosen by many variables. Not just from asking!! \n\n"
-    #                     "<:Professional:1031742465901875220> - **<@&1028937084033044540>** You Must be a Pro!! will be chosen from helping, activity, ect. Not just from asking!! Also the role can be removed!! \n\n"
-    #                     "------------------------------------- \n"
-    #                     "**Are you ready?**",
-    #         url="https://www.thecyberhub.org/",
-    #         # timestamp=datetime.now(tz=None),
-    #         color=0xe74c3c
-    #     )
-    #
-    #     msg = await ctx.send(embed=embed)
-    #     # await msg.add_reaction("<:BlueTeam:1026898873471471697>")
-    #     # await msg.add_reaction("<:RedTeam:1027642650653896724>")
-    #     # await msg.add_reaction("<:PurpleTeam:1027642647076151326>")
-    #
-    #     await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
-    #
-    # @bot.command(pass_context=True)
-    # async def self_roles_helper(ctx):
-    #     embed = discord.Embed(
-    #         title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
-    #         description="\n\n"
-    #                     "**How to earn Helper Roles?** \n"
-    #                     "------------------------------------- \n\n"
-    #                     "<:Helper:1027660602170167317> - <@&1000649273584656414> The Helper role is a special role. Folks within our community can ping this role when they have a specific question. Anyone can choose this role, but please do not take it if you do not want too be pinged for assistance. \n\n"
-    #                     "------------------------------------- \n"
-    #                     "**Are you ready to help?**",
-    #         url="https://www.thecyberhub.org/",
-    #         # timestamp=datetime.now(tz=None),
-    #         color=0xe67e22
-    #     )
-    #
-    #     msg = await ctx.send(embed=embed)
-    #     await msg.add_reaction("<:Helper:1027660602170167317>")
-    #
-    #     await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
-    #
-    # @bot.command(pass_context=True)
-    # async def self_roles_verify(ctx):
-    #     embed = discord.Embed(
-    #         title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
-    #         description="\n\n"
-    #                     "**Verify :white_check_mark:** \n"
-    #                     "------------------------------------- \n"
-    #                     "**After clicking on the below checkbox you will get the access to this server.** \n"
-    #                     "**Make sure to choose your #roles after verifying yourself.** \n",
-    #         url="https://www.thecyberhub.org/",
-    #         # timestamp=datetime.now(tz=None),
-    #         color=0xe67e22
-    #     )
-    #
-    #     msg = await ctx.send(embed=embed)
-    #     await msg.add_reaction("<:Checkbox:1059552410516869170>")
-    #
-    #     await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
+    @bot.command(pass_context=True)
+    async def self_roles_cyber_teams(ctx):
+        embed = discord.Embed(
+            title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
+            description="\n\n"
+                        "**Are you Blue Team,Red Team, or a little Both?** \n"
+                        "**Let us know what Team you Represent by reacting down below!!!** \n"
+                        "------------------------------------- \n\n"
+                        "<:BlueTeam:1026898873471471697> - **<@&1028925586292351036>** Defense\n\n"
+                        "<:RedTeam:1027642650653896724> - **<@&1028925597931540490>** Offense\n\n"
+                        "<:PurpleTeam:1027642647076151326> - **<@&1028925767742136412>** Both\n\n"
+                        "------------------------------------- \n"
+                        "**The best Defense is a good Offense!**"
+                        "",
+            url="https://www.thecyberhub.org/",
+            # timestamp=datetime.now(tz=None),
+            color=0x7289da
+        )
+
+        msg = await ctx.send(embed=embed)
+        await msg.add_reaction("<:BlueTeam:1026898873471471697>")
+        await msg.add_reaction("<:RedTeam:1027642650653896724>")
+        await msg.add_reaction("<:PurpleTeam:1027642647076151326>")
+
+        await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
+
+    @bot.command(pass_context=True)
+    async def self_roles_cyber_pro(ctx):
+        embed = discord.Embed(
+            title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
+            description="\n\n"
+                        "**How to earn Special Roles?** \n"
+                        "------------------------------------- \n\n"
+                        "<:Volunteer:1031742474269499393> - **<@&1028936957260201994>** will be selected manually based on their contribution and engagement on the server. \n\n"
+                        "<:Moderator:1027660630620131378> - **<@&843201976418566145>** will be chosen by many variables. Not just from asking!! \n\n"
+                        "<:Professional:1031742465901875220> - **<@&1028937084033044540>** You Must be a Pro!! will be chosen from helping, activity, ect. Not just from asking!! Also the role can be removed!! \n\n"
+                        "------------------------------------- \n"
+                        "**Are you ready?**",
+            url="https://www.thecyberhub.org/",
+            # timestamp=datetime.now(tz=None),
+            color=0xe74c3c
+        )
+
+        msg = await ctx.send(embed=embed)
+        # await msg.add_reaction("<:BlueTeam:1026898873471471697>")
+        # await msg.add_reaction("<:RedTeam:1027642650653896724>")
+        # await msg.add_reaction("<:PurpleTeam:1027642647076151326>")
+
+        await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
+
+    @bot.command(pass_context=True)
+    async def self_roles_helper(ctx):
+        embed = discord.Embed(
+            title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
+            description="\n\n"
+                        "**How to earn Helper Roles?** \n"
+                        "------------------------------------- \n\n"
+                        "<:Helper:1027660602170167317> - <@&1000649273584656414> The Helper role is a special role. Folks within our community can ping this role when they have a specific question. Anyone can choose this role, but please do not take it if you do not want too be pinged for assistance. \n\n"
+                        "------------------------------------- \n"
+                        "**Are you ready to help?**",
+            url="https://www.thecyberhub.org/",
+            # timestamp=datetime.now(tz=None),
+            color=0xe67e22
+        )
+
+        msg = await ctx.send(embed=embed)
+        await msg.add_reaction("<:Helper:1027660602170167317>")
+
+        await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
+
+    @bot.command(pass_context=True)
+    async def self_roles_verify(ctx):
+        embed = discord.Embed(
+            title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
+            description="\n\n"
+                        "**Verify :white_check_mark:** \n"
+                        "------------------------------------- \n"
+                        "**After clicking on the below checkbox you will get the access to this server.** \n"
+                        "**Make sure to choose your #roles after verifying yourself.** \n",
+            url="https://www.thecyberhub.org/",
+            # timestamp=datetime.now(tz=None),
+            color=0xe67e22
+        )
+
+        msg = await ctx.send(embed=embed)
+        await msg.add_reaction("<:Checkbox:1059552410516869170>")
+
+        await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
 
     # on join welcome message
     @bot.event
