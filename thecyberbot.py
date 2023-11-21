@@ -4,6 +4,9 @@ import asyncio
 import os
 from dotenv import load_dotenv
 import random
+from utils.welcome import welcome_message
+from utils.remove_reactions import remove_react
+from utils.add_reactions import add_reactions
 
 colors = [
     0x1abc9c, 0x11806a, 0x2ecc71, 0x1f8b4c, 0x3498db, 0x206694,
@@ -49,144 +52,13 @@ def run_discord_bot():
     @bot.event
     async def on_raw_reaction_add(payload):
         our_message_id = self_roles_1_id
-        if our_message_id == payload.message_id:
-            member = payload.member
-            guild = member.guild
-            emoji = payload.emoji.name
-
-            if emoji == 'Student':
-                role = discord.utils.get(guild.roles, name='Student')
-            elif emoji == 'SystemAdministrator':
-                role = discord.utils.get(guild.roles, name='System Administrator')
-            elif emoji == 'MalwareAnalyst':
-                role = discord.utils.get(guild.roles, name='Malware Analyst')
-            elif emoji == 'PenetrationTester':
-                role = discord.utils.get(guild.roles, name='Penetration Tester')
-            elif emoji == 'BugHunter':
-                role = discord.utils.get(guild.roles, name='Bug Hunter')
-            elif emoji == 'CTFPlayer':
-                role = discord.utils.get(guild.roles, name='CTF Player')
-            elif emoji == 'OpenSourceContributor':
-                role = discord.utils.get(guild.roles, name='Opensource Contributor')
-            else:
-                role = discord.utils.get(guild.roles, name=payload.emoji.name)
-            await member.add_roles(role)
-
-        # These roles can be given by the admins only
-        # pro_message_id = self_roles_pro_id
-        # if pro_message_id == payload.message_id:
-        #     member = payload.member
-        #     guild = member.guild
-        #     emoji = payload.emoji.name
-        #
-        #     if emoji == 'Volunteer':
-        #         role = discord.utils.get(guild.roles, name='Student')
-        #     elif emoji == 'Professional':
-        #         role = discord.utils.get(guild.roles, name='Professional')
-        #     elif emoji == 'Volunteer':
-        #         role = discord.utils.get(guild.roles, name='System Administrator')
-        #     else:
-        #         role = discord.utils.get(guild.roles, name=payload.emoji.name)
-        #     await member.add_roles(role)
-
-        # RedTeam roles
-        cyber_teams_message_id = self_roles_cyber_team_id
-        if cyber_teams_message_id == payload.message_id:
-            member = payload.member
-            guild = member.guild
-            emoji = payload.emoji.name
-
-            if emoji == 'BlueTeam':
-                role = discord.utils.get(guild.roles, name='Blue Team')
-            elif emoji == 'RedTeam':
-                role = discord.utils.get(guild.roles, name='Red Team')
-            elif emoji == 'PurpleTeam':
-                role = discord.utils.get(guild.roles, name='Purple Team')
-            else:
-                role = discord.utils.get(guild.roles, name=payload.emoji.name)
-            await member.add_roles(role)
-
-        # Helper roles
-        helper_message_id = self_roles_helper_id
-        if helper_message_id == payload.message_id:
-            member = payload.member
-            guild = member.guild
-            emoji = payload.emoji.name
-            if emoji == 'Helper':
-                role = discord.utils.get(guild.roles, name='Helper')
-            else:
-                role = discord.utils.get(guild.roles, name=payload.emoji.name)
-            await member.add_roles(role)
-
-        # Verify roles
-        verify_message_id = self_roles_verify_id
-        if verify_message_id == payload.message_id:
-            member = payload.member
-            guild = member.guild
-            emoji = payload.emoji.name
-            if emoji == 'Checkbox':
-                role = discord.utils.get(guild.roles, name='verified')
-            else:
-                role = discord.utils.get(guild.roles, name=payload.emoji.name)
-            await member.add_roles(role)
+        await add_reactions(our_message_id, payload, self_roles_cyber_team_id, self_roles_helper_id, self_roles_verify_id)
 
     # Removed roles
     @bot.event
     async def on_raw_reaction_remove(payload):
         our_message_id = self_roles_1_id
-
-        if our_message_id == payload.message_id:
-            guild = await(bot.fetch_guild(payload.guild_id))
-            emoji = payload.emoji.name
-            if emoji == 'Student':
-                role = discord.utils.get(guild.roles, name='Student')
-            elif emoji == 'SystemAdministrator':
-                role = discord.utils.get(guild.roles, name='System Administrator')
-            elif emoji == 'MalwareAnalyst':
-                role = discord.utils.get(guild.roles, name='Malware Analyst')
-            elif emoji == 'PenetrationTester':
-                role = discord.utils.get(guild.roles, name='Penetration Tester')
-            elif emoji == 'BugHunter':
-                role = discord.utils.get(guild.roles, name='Bug Hunter')
-            elif emoji == 'CTFPlayer':
-                role = discord.utils.get(guild.roles, name='CTF Player')
-            elif emoji == 'OpenSourceContributor':
-                role = discord.utils.get(guild.roles, name='Opensource Contributor')
-            member = await(guild.fetch_member(payload.user_id))
-
-        # RedTeam roles
-        cyber_teams_message_id = self_roles_cyber_team_id
-        if cyber_teams_message_id == payload.message_id:
-            guild = await(bot.fetch_guild(payload.guild_id))
-            emoji = payload.emoji.name
-            if emoji == 'BlueTeam':
-                role = discord.utils.get(guild.roles, name='Blue Team')
-            elif emoji == 'RedTeam':
-                role = discord.utils.get(guild.roles, name='Red Team')
-            elif emoji == 'PurpleTeam':
-                role = discord.utils.get(guild.roles, name='Purple Team')
-            member = await(guild.fetch_member(payload.user_id))
-
-            if member is not None:
-                await member.remove_roles(role)
-                print(f"Remove: {role}.")
-            else:
-                print("Member not found")
-
-        # Helper role
-        helper_message_id = self_roles_helper_id
-        if helper_message_id == payload.message_id:
-            guild = await(bot.fetch_guild(payload.guild_id))
-            emoji = payload.emoji.name
-            if emoji == 'Helper':
-                role = discord.utils.get(guild.roles, name='Helper')
-            member = await(guild.fetch_member(payload.user_id))
-
-            if member is not None:
-                await member.remove_roles(role)
-                print(f"Remove: {role}.")
-            else:
-                print("Member not found")
+        await remove_react(our_message_id, payload, bot, self_roles_cyber_team_id, self_roles_helper_id)
 
     @bot.command()
     async def hello(ctx):
@@ -313,22 +185,14 @@ def run_discord_bot():
 
         await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
 
+
     # on join welcome message
     @bot.event
     async def on_member_join(member):
-        channel_id = 799183505808556044
-        channel = bot.get_channel(channel_id)
-        user_count = len(member.guild.members)
-        color = random.choice(colors)
-        color = color
-        embed = discord.Embed(
-            title=f"Thecyberworld Community",
-            description=f"Welcome {member.name} ({member.mention}) to the server! \nWe are now **{user_count}** members strong!",
-            color=color
-        )
-        embed.add_field(name="Community Links", value="https://linktr.ee/thecyberworld", inline=False)
-        embed.set_thumbnail(url=member.avatar.url)
+        embed, channel = welcome_message(bot, random, member, discord, colors)
         await channel.send(embed=embed)
+
+
 
     # @bot.event
     # async def on_member_ban(member):
