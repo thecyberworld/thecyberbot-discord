@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 import random
 from utils.welcome import welcome_message
-from utils.reactions.remove_reactions import remove_react
+from utils.reactions.remove_reactions import remove_reactions
 from utils.reactions.add_reactions import add_reactions
 from utils.reactions.self_roles_team import self_role_team
 from utils.reactions.self_roles_pro import self_role_pro
@@ -52,7 +52,7 @@ def run_discord_bot():
     @bot.event
     async def on_raw_reaction_remove(payload):
         our_message_id = self_roles_1_id
-        await remove_react(our_message_id, payload, bot, self_roles_cyber_team_id, self_roles_helper_id)
+        await remove_reactions(our_message_id, payload, bot, self_roles_cyber_team_id, self_roles_helper_id)
 
     @bot.command()
     async def hello(ctx):
