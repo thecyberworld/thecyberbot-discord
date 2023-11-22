@@ -4,9 +4,9 @@ import asyncio
 import os
 from dotenv import load_dotenv
 import random
-from utils.welcome import welcome_message
-from utils.reactions.remove_reactions import remove_reactions
-from utils.reactions.add_reactions import add_reactions
+from utils.welcome.welcome import welcome_message
+from utils.reactions.remove_reactions import remove_reaction
+from utils.reactions.add_reactions import add_reaction
 from utils.reactions.self_roles_team import self_role_team
 from utils.reactions.self_roles_pro import self_role_pro
 from utils.reactions.self_roles_helper import self_role_helper
@@ -43,13 +43,13 @@ def run_discord_bot():
     @bot.event
     async def on_raw_reaction_add(payload):
 
-        await add_reactions()
+        await add_reaction(payload)
 
     # Removed roles
     @bot.event
     async def on_raw_reaction_remove(payload):
 
-        await remove_reactions(payload, bot)
+        await remove_reaction(payload, bot)
 
     @bot.command()
     async def hello(ctx):
