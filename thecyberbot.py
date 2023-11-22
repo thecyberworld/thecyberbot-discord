@@ -31,28 +31,25 @@ def run_discord_bot():
     intents.message_content = True
     bot = discord.Client(intents=intents)
     bot = commands.Bot(command_prefix='!', intents=intents)
-    self_roles_1_id = 1027668015791214673
-    self_roles_cyber_team_id = 1031750672141537352
-    self_roles_helper_id = 1031755073128247397
-    self_roles_verify_id = 1059559943071608853
+    
 
     # self_roles_pro_id = 1027668015791214673
 
     @bot.event
     async def on_ready():
-        
+
         await ready(bot)
 
     @bot.event
     async def on_raw_reaction_add(payload):
-        our_message_id = self_roles_1_id
-        await add_reactions(our_message_id, payload, self_roles_cyber_team_id, self_roles_helper_id, self_roles_verify_id)
+
+        await add_reactions()
 
     # Removed roles
     @bot.event
     async def on_raw_reaction_remove(payload):
-        our_message_id = self_roles_1_id
-        await remove_reactions(our_message_id, payload, bot, self_roles_cyber_team_id, self_roles_helper_id)
+
+        await remove_reactions(payload, bot)
 
     @bot.command()
     async def hello(ctx):

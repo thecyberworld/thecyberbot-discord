@@ -1,7 +1,11 @@
 import discord
+self_roles_1_id = 1027668015791214673
+self_roles_cyber_team_id = 1031750672141537352
+self_roles_helper_id = 1031755073128247397
+self_roles_verify_id = 1059559943071608853
 
-async def add_reactions(our_message_id, payload, self_roles_cyber_team_id, self_roles_helper_id, self_roles_verify_id):
-    if our_message_id == payload.message_id:
+async def add_reactions(self_roles_1_id, payload, self_roles_cyber_team_id, self_roles_helper_id, self_roles_verify_id):
+    if self_roles_1_id == payload.message_id:
         member = payload.member
         guild = member.guild
         emoji = payload.emoji.name
