@@ -13,7 +13,7 @@ from utils.reactions.self_roles_helper import self_role_helper
 from utils.reactions.self_roles_verify import self_role_verify
 from utils.reactions.self_roles_verify import self_role_verify
 from utils.welcome.ready import ready
-# from utils.ai_generate.ai_reply import on_message
+from utils.ai_generate.ai_repsponse import on_message
 
 colors = [
     0x1abc9c, 0x11806a, 0x2ecc71, 0x1f8b4c, 0x3498db, 0x206694,
@@ -51,13 +51,13 @@ def run_discord_bot():
     @bot.event
     async def on_raw_reaction_add(payload):
 
-        await add_reactions(self_roles_1_id, payload, self_roles_cyber_team_id, self_roles_helper_id, self_roles_verify_id)
+        await add_reactions(payload, self_roles_1_id,self_roles_cyber_team_id, self_roles_helper_id, self_roles_verify_id)
 
     # Removed roles
     @bot.event
     async def on_raw_reaction_remove(payload):
 
-        await remove_reaction(payload, bot, self_roles_1_id, self_roles_cyber_team_id, self_roles_helper_id)
+        await remove_reaction(bot, payload, self_roles_1_id, self_roles_cyber_team_id, self_roles_helper_id)
 
     @bot.command()
     async def hello(ctx):
@@ -89,9 +89,10 @@ def run_discord_bot():
         embed, channel = welcome_message(bot, random, member, discord, colors)
         await channel.send(embed=embed)
 
-    # @bot.event
-    # async def send_ai_reply(message):
-    #     await on_message(bot, message)
+    @bot.event
+    async def send_ai_reply(message):
+        print("\n\nmain:",message,"\n\n")
+        await on_message(bot, message)
 
     # Remember to run your bot with your personal TOKEN
     bot.run(TOKEN)
