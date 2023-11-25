@@ -6,13 +6,14 @@ from dotenv import load_dotenv
 import random
 from utils.welcome.welcome import welcome_message
 from utils.reactions.remove_reactions import remove_reaction
-from utils.reactions.add_reactions import add_reaction
+from utils.reactions.add_reactions import add_reactions
 from utils.reactions.self_roles_team import self_role_team
 from utils.reactions.self_roles_pro import self_role_pro
 from utils.reactions.self_roles_helper import self_role_helper
 from utils.reactions.self_roles_verify import self_role_verify
 from utils.reactions.self_roles_verify import self_role_verify
 from utils.welcome.ready import ready
+from utils.ai_generate.ai_repsponse import on_message
 
 colors = [
     0x1abc9c, 0x11806a, 0x2ecc71, 0x1f8b4c, 0x3498db, 0x206694,
@@ -31,7 +32,14 @@ def run_discord_bot():
     intents.message_content = True
     bot = discord.Client(intents=intents)
     bot = commands.Bot(command_prefix='!', intents=intents)
-    
+    # self_roles_1_id = 1027668015791214673
+    # self_roles_cyber_team_id = 1031750672141537352
+    # self_roles_helper_id = 1031755073128247397
+    # self_roles_verify_id = 1059559943071608853
+    self_roles_1_id = None
+    self_roles_cyber_team_id = None
+    self_roles_helper_id = None
+    self_roles_verify_id = None
 
     # self_roles_pro_id = 1027668015791214673
 
@@ -43,13 +51,13 @@ def run_discord_bot():
     @bot.event
     async def on_raw_reaction_add(payload):
 
-        await add_reaction(payload)
+        await add_reactions(payload, self_roles_1_id,self_roles_cyber_team_id, self_roles_helper_id, self_roles_verify_id)
 
     # Removed roles
     @bot.event
     async def on_raw_reaction_remove(payload):
 
-        await remove_reaction(payload, bot)
+        await remove_reaction(bot, payload, self_roles_1_id, self_roles_cyber_team_id, self_roles_helper_id)
 
     @bot.command()
     async def hello(ctx):
@@ -80,6 +88,11 @@ def run_discord_bot():
     async def on_member_join(member):
         embed, channel = welcome_message(bot, random, member, discord, colors)
         await channel.send(embed=embed)
+
+    @bot.event
+    async def send_ai_reply(message):
+        print("\n\nmain:",message,"\n\n")
+        await on_message(bot, message)
 
     # Remember to run your bot with your personal TOKEN
     bot.run(TOKEN)
