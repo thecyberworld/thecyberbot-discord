@@ -1,6 +1,6 @@
 import  discord
 
-async def remove_reaction(payload, bot):
+async def remove_reaction(payload, bot, self_roles_1_id, self_roles_cyber_team_id, self_roles_helper_id):
     self_roles_1_id = 1027668015791214673
     self_roles_cyber_team_id = 1031750672141537352
     self_roles_helper_id = 1031755073128247397
