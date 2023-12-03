@@ -1,17 +1,20 @@
+import os
 from requests.exceptions import ReadTimeout
 from bardapi import Bard
 
-token ="cgiLwhaqPcHi2CqHuwTnngacBxenCB9jstjY1RclxjYGB1Z7hAr3gbvfRHv-qRR1UJlYxg."
+BARD_API_KEY = os.getenv('BARD_API_KEY')
+token = BARD_API_KEY
 
 bard = Bard(token=token)
 
-if not token:
+if not BARD_API_KEY:
     raise ValueError("BARD_API_KEY environment variable not set")
 
+
 def perform_search(query):
-    try: 
+    try:
         response = bard.get_answer(query)
-        print(response,"check perform response")
+        print(response, "check perform response")
         if response:
             return response['content']
         else:
@@ -20,6 +23,7 @@ def perform_search(query):
         raise ReadTimeout("Bard API request timed out") from e
     except Exception as e:
         print(f"Error in perform_search: {str(e)}")
+
 
 def google_bard(query):
     try:
@@ -30,6 +34,8 @@ def google_bard(query):
             return "No description found."
     except ReadTimeout:
         return "Bard API request timed out. Please try again."
+
+
 def google_search(query):
     try:
         content = perform_search(query)
@@ -38,18 +44,19 @@ def google_search(query):
     except ReadTimeout:
         return "Bard API request timed out. Please try again."
 
+
 async def on_message(bot, message):
-    print("\n\nai_response",message,"\n\n")
+    print("\n\nai_response", message, "\n\n")
     content = message.content.lower()
     if content:
-        print(content,"inside if")
+        print(content, "inside if")
         your_intro_prompt = f"""
 
         your are cyber security bot from thecyberhub.
                 
                 Prompt: {content}
                 """
-                
+
         bard_response = google_search(your_intro_prompt)
         await message.channel.send(bard_response)
         await bot.process_commands(message)

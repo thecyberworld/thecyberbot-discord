@@ -13,7 +13,7 @@ import logging
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
-bot = commands.Bot(command_prefix ='!', intents=intents)
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 load_dotenv()
 logging.basicConfig(
@@ -25,13 +25,14 @@ token = os.getenv("BARD_API_KEY")
 print(token)
 BARD_API_KEY = os.getenv("BARD_API_KEY")
 
-Discord_Token =  os.getenv("TOKEN")
+Discord_Token = os.getenv("TOKEN")
 discord_token = Discord_Token
 
 if not token:
     raise ValueError("BARD_API_KEY environment variable not set")
 
 bard = Bard(token=token)
+
 
 @retry(
     retry_on_exception=lambda exc: isinstance(exc, ReadTimeout),
@@ -68,16 +69,17 @@ async def on_message(message):
     else:
         await message.channel.send("No search results found.")
 
-        
+
 def perform_search(query):
-    try: 
+    try:
         response = bard.get_answer(query)
-        print("check perform response:\n\n",response)
+        print("check perform response:\n\n", response)
         if response:
             return response['content']
         else:
             return "No search results found."
     except ReadTimeout as e:
         print(f"Error in perform_search: {str(e)}")
+
 
 bot.run(discord_token)

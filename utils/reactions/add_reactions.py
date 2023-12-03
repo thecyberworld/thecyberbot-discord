@@ -1,6 +1,7 @@
 import discord
 
-async def add_reaction(self_roles_1_id, payload, self_roles_cyber_team_id, self_roles_helper_id, self_roles_verify_id):
+
+async def add_reaction(payload):
     self_roles_1_id = 1027668015791214673
     self_roles_cyber_team_id = 1031750672141537352
     self_roles_helper_id = 1031755073128247397

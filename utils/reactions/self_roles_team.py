@@ -1,5 +1,6 @@
 import discord
 
+
 async def self_role_team(ctx):
     embed = discord.Embed(
         title="**<:thecyberworld:1027642656614006874> Thecyberworld's Discord Server Roles!**",
@@ -17,12 +18,10 @@ async def self_role_team(ctx):
         # timestamp=datetime.now(tz=None),
         color=0x7289da
     )
-    
+
     msg = await ctx.send(embed=embed)
     await msg.add_reaction("<:BlueTeam:1026898873471471697>")
     await msg.add_reaction("<:RedTeam:1027642650653896724>")
     await msg.add_reaction("<:PurpleTeam:1027642647076151326>")
 
     await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
-
-        
