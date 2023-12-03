@@ -1,7 +1,7 @@
 import os
 import discord
 from dotenv import load_dotenv
-import thecyberbot
+from thecyberbot import thecyberbot
 
 colors = [
     0x1abc9c, 0x11806a, 0x2ecc71, 0x1f8b4c, 0x3498db, 0x206694,
@@ -20,5 +20,5 @@ intents.message_content = True
 bot = discord.Client(intents=intents)
 
 if __name__ == "__main__":
-    thecyberbot.run_discord_bot()
+    thecyberbot()
     bot.run(TOKEN)
