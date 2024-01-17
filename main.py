@@ -1,7 +1,10 @@
-import thecyberbot
-# import thecyberbot_test
+from flask import Flask
 
+app = Flask(__name__)
 
-if __name__ == "__main__":
-    thecyberbot.run_discord_bot()
-    # thecyberbot_test.run_discord_bot()
+@app.route('/')
+def home():
+    return "Hello, World!"
+
+if __name__ == '__main__':
+    app.run()
