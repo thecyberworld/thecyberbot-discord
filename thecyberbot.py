@@ -89,6 +89,23 @@ def run_discord_bot():
         #         role = discord.utils.get(guild.roles, name=payload.emoji.name)
         #     await member.add_roles(role)
 
+        job_roles_message_id = 1118584278024978523
+        if job_roles_message_id == payload.message_id:
+            member = payload.member
+            guild = member.guild
+            emoji = payload.emoji.name
+
+            if emoji == 'WebSecurity':
+                role = discord.utils.get(guild.roles, name='Security Engineer')
+            elif emoji == 'Fingerprint':
+                role = discord.utils.get(guild.roles, name='Incident Response')
+            elif emoji == 'CodeInspection':
+                role = discord.utils.get(guild.roles, name='Threat Intelligent Researcher')
+            else:
+                role = discord.utils.get(guild.roles, name=payload.emoji.name)
+            print(f"Add: {role}.")
+            await member.add_roles(role)
+
         # RedTeam roles
         cyber_teams_message_id = self_roles_cyber_team_id
         if cyber_teams_message_id == payload.message_id:
@@ -187,6 +204,21 @@ def run_discord_bot():
                 print(f"Remove: {role}.")
             else:
                 print("Member not found")
+
+        # Job roles
+        job_roles_message_id = 1118584278024978523
+        if job_roles_message_id == payload.message_id:
+            guild = await(bot.fetch_guild(payload.guild_id))
+            emoji = payload.emoji.name
+            if emoji == 'WebSecurity':
+                role = discord.utils.get(guild.roles, name='Security Engineer')
+            elif emoji == 'Fingerprint':
+                role = discord.utils.get(guild.roles, name='Incident Response')
+            elif emoji == 'CodeInspection':
+                role = discord.utils.get(guild.roles, name='Threat Intelligent Researcher')
+            print(f"Remove: {role}.")
+            member = await(guild.fetch_member(payload.user_id))
+
 
     @bot.command()
     async def hello(ctx):
