@@ -1,3 +1,12 @@
+## [0.2.2](https://github.com/thecyberworld/thecyberbot-discord/compare/v0.2.1...v0.2.2) (2024-01-17)
+
+
+### Bug Fixes
+
+* flask ([df8c3dc](https://github.com/thecyberworld/thecyberbot-discord/commit/df8c3dc16346df72786b8749186adde5012322a7))
+
+
+
 ## [0.2.1](https://github.com/thecyberworld/thecyberbot-discord/compare/v0.2.0...v0.2.1) (2023-04-16)
 
 
