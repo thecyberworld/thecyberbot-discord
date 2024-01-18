@@ -1,3 +1,12 @@
+## [0.2.3](https://github.com/thecyberworld/thecyberbot-discord/compare/v0.2.2...v0.2.3) (2024-01-18)
+
+
+### Bug Fixes
+
+* remove flash ([2fba17a](https://github.com/thecyberworld/thecyberbot-discord/commit/2fba17a535486642c6ab560d2c2743ef07ac94db))
+
+
+
 ## [0.2.2](https://github.com/thecyberworld/thecyberbot-discord/compare/v0.2.1...v0.2.2) (2024-01-17)
 
 
