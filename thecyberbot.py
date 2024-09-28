@@ -5,6 +5,8 @@ import os
 from dotenv import load_dotenv
 import random
 
+from utils.welcome.welcome import send_welcome_message, delete_spam_message, ban_for_repeated_messages
+
 colors = [
     0x1abc9c, 0x11806a, 0x2ecc71, 0x1f8b4c, 0x3498db, 0x206694,
     0x9b59b6, 0x71368a, 0xe91e63, 0xad1457, 0xf1c40f, 0xc27c0e,
@@ -15,6 +17,7 @@ colors = [
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
+
 
 def run_discord_bot():
     intents = discord.Intents.default()
@@ -35,16 +38,6 @@ def run_discord_bot():
         print('-' * dash_len)
         print(f'{bot.user} is now running!')
         print('-' * dash_len)
-        while True:
-            channel = bot.get_channel(1065245064613343313)
-            async for message in channel.history(limit=1):
-                latest_message = message
-                content = latest_message.content
-                if content.isnumeric():
-                    latest_message = await channel.fetch_message(channel.last_message_id)
-                    number = int(latest_message.content) + 1
-                    await channel.send(str(number))
-                await asyncio.sleep(60 * 30)
 
     @bot.event
     async def on_raw_reaction_add(payload):
@@ -345,22 +338,22 @@ def run_discord_bot():
 
         await ctx.message.add_reaction("<:thecyberworldbg:1027660630620131378>")
 
-    # on join welcome message
+    # welcome.py
     @bot.event
     async def on_member_join(member):
-        channel_id = 799183505808556044
-        channel = bot.get_channel(channel_id)
-        user_count = len(member.guild.members)
-        color = random.choice(colors)
-        color = color
-        embed = discord.Embed(
-            title=f"Thecyberworld Community",
-            description=f"Welcome {member.name} ({member.mention}) to the server! \nWe are now **{user_count}** members strong!",
-            color=color
-        )
-        embed.add_field(name="Community Links", value="https://linktr.ee/thecyberworld", inline=False)
-        embed.set_thumbnail(url=member.avatar.url)
-        await channel.send(embed=embed)
+        await send_welcome_message(bot, member)
+
+    @bot.event
+    async def on_message(message):
+        if message.author == bot.user:
+            return
+
+        await delete_spam_message(bot, message)
+        # Check for repeated messages in multiple channels and ban the user
+        await ban_for_repeated_messages(bot, message)
+        await bot.process_commands(message)
+
+
 
     # @bot.event
     # async def on_member_ban(member):
